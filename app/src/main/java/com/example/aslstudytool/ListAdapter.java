@@ -1,102 +1,58 @@
 package com.example.aslstudytool;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.media.MediaPlayer;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.EntryViewHolder> {
-    ArrayList words;
-    Context context;
-    ListListener listListener;
-    Activity activity;
-    public interface ListListener{
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
+    private ArrayList<String> mDataset;
 
-        void processResult(String text);
-
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public ListAdapter(ArrayList<String> myDataset) {
+        mDataset = myDataset;
     }
 
-    public ListAdapter(Context context, ArrayList words, ListListener listListener){
-
-        this.words = words;
-        activity = (Activity)context;
-        this.context = context;
-
-        this.listListener = listListener;
-    }
-    public static final int CACHE_SIZE = 15;
-
-
-
-
-
-
-
-    @NonNull
+    // Create new views (invoked by the layout manager)
     @Override
-    public EntryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View wordView = LayoutInflater.from(parent.getContext()).inflate(R.layout.temp_word_list, parent, false);
-        return new EntryViewHolder(wordView);
+    public ListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                       int viewType) {
+        // create a new view
+        View v =  LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recycler_view_single_element, parent, false);
+
+        MyViewHolder vh = new MyViewHolder(v);
+        return vh;
     }
 
-
-
-
-
+    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(@NonNull final EntryViewHolder entryViewHolder, int position) {
-        entryViewHolder.wordText.setText(MainActivity.words.get(position));
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        holder.textView.setText(mDataset.get(position));
 
     }
 
-
-
-
-
+    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return MainActivity.words.size();
+        return mDataset.size();
     }
 
-    class EntryViewHolder extends RecyclerView.ViewHolder {
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView textView;
 
-        View parentView;
-        TextView wordText;
-
-        public EntryViewHolder(@NonNull View itemView) {
-            super(itemView);
-            parentView = itemView.findViewById(R.id.list_parent);
-            wordText = itemView.findViewById(R.id.word_text_view);
-
-
-
-
+        public MyViewHolder(View v) {
+            super(v);
+            textView = v.findViewById(R.id.item_text_view);
         }
-
     }
-
-
-    @Override
-    public int getItemViewType(int position) {
-        return position;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-
-
-
-
 }

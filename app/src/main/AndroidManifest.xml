@@ -15,8 +15,6 @@
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".TempListViewer" />
-        <activity android:name=".ListViewer" />
         <activity android:name=".Dictionary" />
         <activity android:name=".MainActivity">
             <intent-filter>
