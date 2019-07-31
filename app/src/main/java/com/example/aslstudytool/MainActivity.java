@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.example.aslstudytool.models.Word;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
                 int a = 1;
                 System.out.println(wordUrls);
                 System.out.println(words);
+
+                final ArrayList<Word> wordlist = new ArrayList<>();
+
+                for (int i = 0; i < words.size(); ++i) {
+                    wordlist.add(new Word(words.get(i),words.get(i).charAt(0),wordUrls.get(i)));
+                }
                 //Do something with values
 
                 final RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
@@ -54,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         recyclerView.setLayoutManager(layoutManager);
-                        RecyclerView.Adapter mAdapter = new ListAdapter(words);
+                        RecyclerView.Adapter mAdapter = new ListAdapter(wordlist);
                         recyclerView.setAdapter(mAdapter);
 
                     }

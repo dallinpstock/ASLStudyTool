@@ -6,13 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.aslstudytool.models.Word;
+
 import java.util.ArrayList;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
-    private ArrayList<String> mDataset;
+    private ArrayList<Word> mDataset;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(ArrayList<String> myDataset) {
+    public ListAdapter(ArrayList<Word> myDataset) {
         mDataset = myDataset;
     }
 
@@ -33,7 +35,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.setText(mDataset.get(position));
+        holder.textView.setText(mDataset.get(position).getWord());
 
     }
 
