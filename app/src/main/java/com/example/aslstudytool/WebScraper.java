@@ -30,9 +30,30 @@ public class WebScraper extends AsyncTask<WebScraper.WebScraperCallback, Void, V
                     if (mMatcher.find()) {
                         if (!mMatcher.group().contains("Lifeprint.com")) {
                             if((int)(mMatcher.group(1).charAt(0))==(i+97)) {
-                            MainActivity.wordUrls.add("https://www.lifeprint.com/asl101/pages-signs/"+(mMatcher.group(1).charAt(0))+"/"+mMatcher.group(1));
+                                if(MainActivity.wordUrls.size()>1) {
 
-                                MainActivity.words.add(mMatcher.group(1).substring(0,1).toUpperCase()+mMatcher.group(1).substring(1).replace(".htm", "").replace("-"," ").trim());
+                                    if (MainActivity.wordUrls.get(MainActivity.wordUrls.size() - 1).equals("https://www.lifeprint.com/asl101/pages-signs/" + (mMatcher.group(1).charAt(0)) + "/" + mMatcher.group(1))) {
+
+                                    } else {
+                                        MainActivity.wordUrls.add("https://www.lifeprint.com/asl101/pages-signs/" + (mMatcher.group(1).charAt(0)) + "/" + mMatcher.group(1));
+
+                                        MainActivity.words.add(mMatcher.group(1).substring(0, 1).toUpperCase() + mMatcher.group(1).substring(1).replace(".htm", "").replace("-", " ").trim());
+                                    }
+                                }else{
+
+                                    MainActivity.wordUrls.add("https://www.lifeprint.com/asl101/pages-signs/" + (mMatcher.group(1).charAt(0)) + "/" + mMatcher.group(1));
+
+                                    MainActivity.words.add(mMatcher.group(1).substring(0, 1).toUpperCase() + mMatcher.group(1).substring(1).replace(".htm", "").replace("-", " ").trim());
+                                }
+                             if(MainActivity.words.get(MainActivity.words.size()-1).length()>2&&MainActivity.words.get(MainActivity.words.size()-2).length()>=3
+                                     &&MainActivity.words.size()>1
+                                     &&MainActivity.words.get(MainActivity.words.size()-1).charAt(0)==MainActivity.words.get(MainActivity.words.size()-2).charAt(0)
+                                        &&MainActivity.words.get(MainActivity.words.size()-1).charAt(2)<MainActivity.words.get(MainActivity.words.size()-2).charAt(2)){
+
+                                MainActivity.words.remove(MainActivity.words.size()-2);
+                                MainActivity.wordUrls.remove(MainActivity.wordUrls.size()-2);
+                             }
+
                             }
 
                             /*else{
