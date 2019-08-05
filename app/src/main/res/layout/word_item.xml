@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<data>
+
+    <variable
+        name="listener"
+        type="com.example.aslstudytool.WordAdapter.Listener"/>
+
+    <variable
+        name="word"
+        type="com.example.aslstudytool.models.Word" />
+
+</data>
+
+<LinearLayout
+ android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:onClick="@{view -> listener.onWordClicked(word)}">
+
+    <TextView
+        android:id="@+id/item_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{word.word}"
+     />
+</LinearLayout>
+</layout>

@@ -1,13 +1,18 @@
 package com.example.aslstudytool.models;
 
-public class Word {
+import android.support.annotation.NonNull;
+
+import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+
+public class Word implements SortedListAdapter.ViewModel{
     private String word;
-    private char letter;
+
     private String url;
 
-    public Word(String word, char letter, String url) {
+
+    public Word(String word, String url) {
         this.word = word;
-        this.letter = letter;
+
         this.url = url;
     }
 
@@ -15,23 +20,31 @@ public class Word {
         return word;
     }
 
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public char getLetter() {
-        return letter;
-    }
-
-    public void setLetter(char letter) {
-        this.letter = letter;
-    }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+
+
+    @Override
+    public <T> boolean isSameModelAs(@NonNull T item) {
+        if(item instanceof Word){
+            final Word word = (Word) item;
+            return word.getWord().equals(getWord());
+        }
+        return false;
+    }
+
+    @Override
+    public <T> boolean isContentTheSameAs(@NonNull T item) {
+        if(item instanceof Word){
+            final Word other = (Word) item;
+            if (!url.equals(other.url)){
+               return false;
+           }
+            return word != null ? word.equals(other.word) : other.word == null;
+        }
+        return false;
     }
 }
