@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
+import java.util.Objects;
+
 public class Word implements SortedListAdapter.ViewModel{
     private String word;
 
@@ -40,10 +42,7 @@ public class Word implements SortedListAdapter.ViewModel{
     public <T> boolean isContentTheSameAs(@NonNull T item) {
         if(item instanceof Word){
             final Word other = (Word) item;
-            if (!url.equals(other.url)){
-               return false;
-           }
-            return word != null ? word.equals(other.word) : other.word == null;
+            return word.equals(other.word);
         }
         return false;
     }

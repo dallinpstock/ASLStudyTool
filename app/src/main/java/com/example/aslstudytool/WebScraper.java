@@ -31,7 +31,7 @@ public class WebScraper extends AsyncTask<WebScraper.WebScraperCallback, Void, V
                         if (!mMatcher.group().contains("Lifeprint.com")) {
                             if((int)(mMatcher.group(1).charAt(0))==(i+97)) {
                                 if(MainActivity.wordUrls.size()>1) {
-
+//TODO send this data straight to the model.
                                     if (MainActivity.wordUrls.get(MainActivity.wordUrls.size() - 1).equals("https://www.lifeprint.com/asl101/pages-signs/" + (mMatcher.group(1).charAt(0)) + "/" + mMatcher.group(1))) {
 
                                     } else {
